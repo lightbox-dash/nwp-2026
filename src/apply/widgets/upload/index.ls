@@ -61,19 +61,23 @@ mod = ({root, ctx, data, parent, pubsub, t, i18n}, ext) ->
               files = [node.files[i] for i from 0 til node.files.length]
                 .map (f) ~> f = {size: f.size, filename: f.name, blob: f}
               (if ext.detail => ext.detail files else Promise.resolve(files))
-                .then (files) ~>
-                  ps = files.map (f) ~>
-                    ps = (@_meta.term or []).map (t) ->
+                .then (files) ~>>
+                  failed = []
+                  await Promise.all files.map (f) ~>>
+                    await Promise.all (@_meta.term or []).map (t) ->>
                       # TODO we need to add sth like `precheck` flag in op
                       # in hint block which op should be check in advance
                       if /count/.exec(t.op.id) => return Promise.resolve true
-                      t.validate(f)
-                    # filter and check if this file fails in any term
-                    Promise.all ps .then -> it.filter(->!it).length > 0
-                  # filter and return the count of files that fails in any term
-                  Promise.all ps .then -> it.filter(->it).length
-            .then (failed-file-count) ~>
-              if failed-file-count => return Promise.reject new Error! <<< {name: \lderror, id: 1020}
+                      v = await t.validate(f)
+                      console.log(v, f, t)
+                      if !v => failed.push {
+                        filename: f.filename
+                        hint: t.msg
+                      }
+                  console.log(failed)
+                  return failed
+            .then (failed) ~>
+              if failed.length => return Promise.reject new Error! <<< {name: \lderror, id: 1020, msg: failed}
               btn = view.get \button
               btn.classList.toggle \running, true
               files = if !@mod.info.config.multiple => [(node.files or []).0].filter(->it)
@@ -108,7 +112,9 @@ mod = ({root, ctx, data, parent, pubsub, t, i18n}, ext) ->
             .catch (e) ->
               node.value = null
               if lderror.id(e) != 1020 => throw e
-              alert t("檔案規格不符")
+              if Array.isArray(e.msg) =>
+                alert("#{t "檔案規格不符"}\n#{e.msg.map(-> "#{it.filename}: #{it.hint}").join "\n"}")
+              else => alert t("檔案規格不符")
               console.log e
 
       handler:

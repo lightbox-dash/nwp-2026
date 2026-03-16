@@ -124,13 +124,13 @@ fc["作品上傳"] =
   meta:
     is-required: true
     term: [
-    * opset: \file, enabled: true, op: \count-range, msg: '請上傳 15 - 25 張作品圖檔，將視為一組作品。'
+    * opset: \file, enabled: true, op: \count-range, msg: '請上傳 15 - 25 張作品圖檔，將視為一組作品'
       config: min: 15, max: 25
-    * opset: \image, enabled: true, op: \long-side, msg: '長邊為 3,000 像素'
+    * opset: \image, enabled: true, op: \long-side, msg: '長邊須為 3,000 像素'
       config: min: 2999, max: 3001
     * opset: \file, enabled: true, op: \extension, msg: '影像須為 jpg 檔'
       config: str: "jpg,jpeg"
-    * opset: \file, enabled: true, op: \size-limit, msg: '單張影像需小於 3MB'
+    * opset: \file, enabled: true, op: \size-limit, msg: '單張影像須小於 3MB'
       config: val: 3145728
     ]
     config:
@@ -138,7 +138,7 @@ fc["作品上傳"] =
       note: [
         "請上傳 15 - 25 張作品圖檔，將視為一組作品。"
         "影像須為 jpg 檔，長邊須等於 3,000 像素，另一邊須小於或等於 3,000 像素。"
-        "單張影像需小於 3MB。"
+        "單張影像須小於 3MB。"
       ]
 
 fc["上傳作品之展呈示意圖"] =
@@ -148,11 +148,11 @@ fc["上傳作品之展呈示意圖"] =
     term: [
     * opset: \file, enabled: true, op: \count-range, msg: '請上傳至多3張呈現作品的展示規劃'
       config: min: 0, max: 3
-    * opset: \image, enabled: true, op: \long-side, msg: '長邊為 3,000 像素。'
+    * opset: \image, enabled: true, op: \long-side, msg: '長邊須為 3,000 像素'
       config: min: 2999, max: 3001
     * opset: \file, enabled: true, op: \extension, msg: '影像須為 jpg 檔'
       config: str: "jpg,jpeg"
-    * opset: \file, enabled: true, op: \size-limit, msg: '單張影像需小於 3MB'
+    * opset: \file, enabled: true, op: \size-limit, msg: '單張影像須小於 3MB'
       config: val: 3145728
     ]
     config:
@@ -162,7 +162,7 @@ fc["上傳作品之展呈示意圖"] =
         "請以示意圖（至多3張）呈現作品的展示規劃。"
         "展示牆面尺寸：寬 3 公尺、高 2.5 公尺。"
         "影像須為 jpg 檔，長邊須等於 3,000 像素，另一邊須小於或等於 3,000 像素。"
-        "單張影像需小於 3MB。"
+        "單張影像須小於 3MB。"
       ]
 
 fc["自我介紹"] =
