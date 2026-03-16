@@ -55,6 +55,12 @@ mod = ({root, ctx, t, pubsub, manager, bi}) ->
     bi.transform \i18n
     block.i18n.module.on \languageChanged, ->
     _debounce-render = debounce 350, ~> view.render!
+    ret = null
+    getInstructions = ->>
+      if(!ret) =>
+        res = await fetch('https://www.lightboxlib.org/jsonapi/node/annual_plan_library/4d6f62ea-3521-476a-877d-6a6b5abb8188')
+        ret := await res.json!
+      ret?.data?.attributes?.field_what?.value
     @_ldview = view = new ldview do
       init-render: false
       root: root
@@ -64,6 +70,9 @@ mod = ({root, ctx, t, pubsub, manager, bi}) ->
         visibility: ({node}) ~>
           name = node.getAttribute \data-name
           node.classList.toggle \d-none, (@_visibility[name]? and !@_visibility[name])
+        "lb-instructions": ({node}) ~>>
+          node.innerHTML = await getInstructions!
+          
     @formmgr.on \change, debounce 350, ~> @optin!
     @optin!
 
@@ -138,5 +147,5 @@ mod = ({root, ctx, t, pubsub, manager, bi}) ->
     # this fields are used for basic prj information used by backend.
     # e.g., `name` and `description` are stored directly in db column for quick access of prj basic info.
     name: @formmgr.content("作品名稱")
-    description: @formmgr.content("作品簡介")
+    description: @formmgr.content("作品簡介-中文")
     thumb: ((@formmgr.content("作品上傳") or []).0 or {}).url
