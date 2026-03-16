@@ -10,7 +10,7 @@ window.lib = ({def, i18n}) ->
     lng = i18n.getLanguage!
     data =
       name: _(form["作品名稱"])
-      description: _(form["作品簡介"])
+      description: ""
       team:
         name: _(form["真實姓名"])
         taxid: ""

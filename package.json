@@ -1,13 +1,13 @@
 {
   "author": "zbryikt",
-  "name": "@lightbox-dash/nwp-2024",
+  "name": "@lightbox-dash/nwp-2026",
   "private": true,
-  "description": "nwp-2024 brd files",
+  "description": "nwp-2026 brd files",
   "version": "1.0.0",
-  "homepage": "https://github.com/lightbox-dash/nwp-2024",
+  "homepage": "https://github.com/lightbox-dash/nwp-2026",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lightbox-dash/nwp-2024"
+    "url": "https://github.com/lightbox-dash/nwp-2026"
   },
   "engines": {
     "node": ">=0.12.6",

@@ -24,7 +24,7 @@ window.lib = function(arg$){
       lng = i18n.getLanguage();
       return data = {
         name: _(form["作品名稱"]),
-        description: _(form["作品簡介"]),
+        description: "",
         team: {
           name: _(form["真實姓名"]),
           taxid: "",

@@ -7,14 +7,14 @@ div
     include:lsc fields/index.ls
     include:lsc index.ls
   div(plug="form")
-    img.border-bottom.print-hide.embed-hide(path,path-src="img/New Wave-grant dash banner 0305.jpg?v1",
-    width="1600",height="800",style="width:100%;height:auto",alt="brd visual")
+    img.border-bottom.print-hide.embed-hide(path,path-src="img/2026 New Wave_1600x600px.jpg?v1",
+    width="1600",height="600",style="width:100%;height:auto",alt="brd visual")
     .sect.embed-hide
       h1 #[span(t="title.name")]
       .mt-3(t="title.date")
       .mt-3
         span 徵件辦法：
-        a(href="https://www.lightboxlib.org/new-wave/2024" target="_blank") https://www.lightboxlib.org/new-wave/2024
+        a(href="https://www.lightboxlib.org/new-wave/" target="_blank") https://www.lightboxlib.org/new-wave/
       .mt-3
         span(t="必填項目提示.0")
         span.mx-2 #[span.text-danger.font-weight-bold ＊]
@@ -30,7 +30,7 @@ div
       
       h4.pt-4 作品規範
       ul.li-tweak
-        li 投件作品，須為 2019 年後之創作。
+        li 投件作品，須為 2021 年後之創作。
         li 投件作品，須未曾獲得或入選國內外之攝影或藝術創作獎項。
         li 個人或團體，至多可各投一組作品參加。
         li 投件作品，可為進行中，或已完成之創作。
@@ -59,7 +59,7 @@ div
         .col-md: +widget("團體名稱")
       .row
         .col-md: +widget("居住地")
-        .col-md: +widget("年齡")
+        .col-md: +widget("生日")
       +widget("性別")
       +widget("國籍")
       +widget("電子信箱")
@@ -67,8 +67,12 @@ div
 
     .sect
       h3#sect-3.mb-5 三、創作自述
-      +widget("作品名稱")
-      +widget("作品簡介")
+      .row
+        .col-md: +widget("作品名稱-中文")
+        .col-md: +widget("作品名稱-英文")
+      .row
+        .col-md: +widget("作品簡介-中文")
+        .col-md: +widget("作品簡介-英文")
       +widget("創作媒材揭露：影像內容是否源自生成式 AI 工具？")
 
     .sect
@@ -84,7 +88,7 @@ div
     .sect.embed-hide
       h3#sect-6.mb-5 六、報名費繳交
       +widget("是否具學生身分？")
-      +widget("學生證正面")
+      +visibility("上傳證件"): +widget("上傳證件")
       +widget("繳費方式")
       +visibility("其他付款方式")
         div 請至以下頁面進行付款，並於取得票號後於下方填寫：

@@ -240,7 +240,7 @@ module.exports =
             # original bid
             #bid = {name: '@grantdash/judge', path: 'common/detail.html'},
             # customized bid
-            bid = {ns: \template/nwp-2024, name: \block, path: 'ticket/detail.html'}
+            bid = {ns: \template/nwp-2026, name: \block, path: 'ticket/detail.html'}
             _ = ({custom-fields, score, rank}) ~>
               @ldcvmgr.get(
                 bid,

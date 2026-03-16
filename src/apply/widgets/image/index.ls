@@ -1,6 +1,6 @@
 module.exports =
   pkg:
-    name: "@makeform/image", extend: {ns: "template/nwp-2024", name: "block", path: 'apply/widgets/upload/index.html'}
+    name: "@makeform/image", extend: {ns: "template/nwp-2026", name: "block", path: 'apply/widgets/upload/index.html'}
     dependencies: [
       {url: "https://cdn.jsdelivr.net/npm/imgtype@0.0.1/index.min.js"}
     ]

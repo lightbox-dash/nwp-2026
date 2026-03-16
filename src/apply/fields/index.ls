@@ -27,7 +27,6 @@ fc["參賽需知"] =
       display: \inline
       value: "我已詳閱，並同意遵守上述內容"
 
-
 fc["真實姓名"] =
   meta: is-required: true
 
@@ -47,11 +46,9 @@ fc["性別"] =
     is-required: true
     config: values: <[女性 男性 自定義]>
 
-fc["年齡"] =
-  type: \@makeform/choice
-  meta:
-    is-required: true
-    config: values: [ "17 歲以下", "18 - 35 歲", "36 - 45 歲", "46 - 55 歲", "56 - 65 歲", "66 歲以上"]
+fc["生日"] =
+  type: \@makeform/date
+  meta: is-required: true
 
 fc["國籍"] =
   type: \@makeform/radio
@@ -88,10 +85,23 @@ fc["聯絡電話"] =
     ]
     config: note: ["填寫格式：0912-345678／02-23456789"]
 
-fc["作品名稱"] =
+fc["作品名稱-中文"] =
   meta: is-required: true
 
-fc["作品簡介"] =
+fc["作品名稱-英文"] =
+  meta: is-required: true
+
+fc["作品簡介-中文"] =
+  type: \@makeform/textarea
+  meta:
+    is-required: true
+    term: [{
+      opset: \length, enabled: true, op: \lte, msg: '長度不符'
+      config: val: 500, method: \simple-word
+    }]
+    config: note: ["500 字以內"]
+
+fc["作品簡介-英文"] =
   type: \@makeform/textarea
   meta:
     is-required: true
@@ -110,26 +120,29 @@ fc["創作媒材揭露：影像內容是否源自生成式 AI 工具？"] =
       note: ["不影響參加資格，惟請照實填寫。"]
 
 fc["作品上傳"] =
-  type: {ns: \template/nwp-2024, name: \block, path: \apply/widgets/image/index.html}
+  type: {ns: \template/nwp-2026, name: \block, path: \apply/widgets/image/index.html}
   meta:
     is-required: true
     term: [
     * opset: \file, enabled: true, op: \count-range, msg: '請上傳 15 - 25 張作品圖檔，將視為一組作品。'
       config: min: 15, max: 25
-    * opset: \image, enabled: true, op: \long-side, msg: '長邊為 3,000 像素。'
+    * opset: \image, enabled: true, op: \long-side, msg: '長邊為 3,000 像素'
       config: min: 2999, max: 3001
     * opset: \file, enabled: true, op: \extension, msg: '影像須為 jpg 檔'
       config: str: "jpg,jpeg"
+    * opset: \file, enabled: true, op: \size-limit, msg: '單張影像需小於 3MB'
+      config: val: 3145728
     ]
     config:
       multiple: true
       note: [
         "請上傳 15 - 25 張作品圖檔，將視為一組作品。"
         "影像須為 jpg 檔，長邊須等於 3,000 像素，另一邊須小於或等於 3,000 像素。"
+        "單張影像需小於 3MB。"
       ]
 
 fc["上傳作品之展呈示意圖"] =
-  type: {ns: \template/nwp-2024, name: \block, path: \apply/widgets/image/index.html}
+  type: {ns: \template/nwp-2026, name: \block, path: \apply/widgets/image/index.html}
   meta:
     is-required: false
     term: [
@@ -139,6 +152,8 @@ fc["上傳作品之展呈示意圖"] =
       config: min: 2999, max: 3001
     * opset: \file, enabled: true, op: \extension, msg: '影像須為 jpg 檔'
       config: str: "jpg,jpeg"
+    * opset: \file, enabled: true, op: \size-limit, msg: '單張影像需小於 3MB'
+      config: val: 3145728
     ]
     config:
       multiple: true
@@ -147,6 +162,7 @@ fc["上傳作品之展呈示意圖"] =
         "請以示意圖（至多3張）呈現作品的展示規劃。"
         "展示牆面尺寸：寬 3 公尺、高 2.5 公尺。"
         "影像須為 jpg 檔，長邊須等於 3,000 像素，另一邊須小於或等於 3,000 像素。"
+        "單張影像需小於 3MB。"
       ]
 
 fc["自我介紹"] =
@@ -186,7 +202,7 @@ fc["是否具學生身分？"] =
         is-required: true
         visible: true
         disabled: false
-        targets: <[學生證正面]>
+        targets: <[上傳證件]>
     ]
     config:
       values: <[是 否]>
@@ -195,9 +211,10 @@ fc["是否具學生身分？"] =
         "學生身分定義：就讀中華民國公、私立國中小、高中、高職之在學生，以及大專院校在學學生包含大專、專科、軍警學校及宗教院校。但不包含私人補習班、社區大學、空中大學、空中學院及大專院校附設之進修補習班。學制包含二專、五專、二技、四技、大學、碩士及博士。部別包含日間部、夜間部、進修部（須為上述學制）及在職專班（須為上述學制）。"
       ]
 
-fc["學生證正面"] =
+fc["上傳證件"] =
   type: \@makeform/upload
   meta:
+    visible: false
     is-required: false
     disabled: true
     title: "上傳學生證、身心障礙證明之正面照"
@@ -212,7 +229,7 @@ fc["報名費-一般"] =
       target: "報名費-一般"
       desc: "攝影創作獎報名費"
       code: "攝影創作獎報名費-個人、團體參加者"
-      amount: "1000"
+      amount: "1200"
       unit: \新台幣
 
 fc["報名費-學生"] =
@@ -225,7 +242,7 @@ fc["報名費-學生"] =
       target: "報名費-學生"
       desc: "攝影創作獎報名費"
       code: "攝影創作獎報名費-學生、身心障礙者"
-      amount: "500"
+      amount: "600"
       unit: \新台幣
 
 fc["繳費方式"] =
