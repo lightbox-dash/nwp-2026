@@ -18,6 +18,23 @@ module.exports =
         fr.readAsArrayBuffer(file)
       catch e
         rej e
+    checkImageReady = (url) ->
+      new Promise (resolve) ->
+        img = new Image!
+        img.onload = -> resolve true
+        img.onerror = -> resolve false
+        img.src = url
+    thumbPoll = (node, ctx, retry = 0) ->>
+      try
+        isReady = await checkImageReady(ctx.thumbUrl)
+        if isReady
+          node.setAttribute \src, ctx.thumbUrl
+        # else if retry < 3
+        #   setTimeout(thumbPoll(node, ctx, retry + 1), 3000)
+        else
+          node.setAttribute \src, ctx.url
+      catch e
+        node.setAttribute \src, ctx.url
     view = new ldview do
       root: root
       ctx: {}
@@ -47,7 +64,10 @@ module.exports =
               number: ({node,ctx}) ->
                 idx = lc.filelist.findIndex (f) -> f.url is ctx.url
                 node.innerText = idx + 1
-              image: ({node,ctx}) -> node.setAttribute \src, ctx.url
+              image: ({node,ctx}) -> 
+                thumb = ctx.url.replace('/file/', 'https://grantdash.blob.core.windows.net/thumbnails/')
+                ctx.thumbUrl = thumb
+                thumbPoll(node, ctx)
       action: click:
         "next-img": ~>
           idx = lc.filelist.findIndex (f) -> f.url is lc.current
