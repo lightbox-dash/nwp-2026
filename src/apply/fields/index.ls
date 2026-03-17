@@ -86,14 +86,19 @@ fc["聯絡電話"] =
     config: note: ["填寫格式：0912-345678／02-23456789"]
 
 fc["作品名稱-中文"] =
-  meta: is-required: true
+  meta:
+    title: "作品名稱（中文）"
+    is-required: true
 
 fc["作品名稱-英文"] =
-  meta: is-required: true
+  meta:
+    title: "作品名稱（英文）"
+    is-required: true
 
 fc["作品簡介-中文"] =
   type: \@makeform/textarea
   meta:
+    title: "作品簡介（中文）"
     is-required: true
     term: [{
       opset: \length, enabled: true, op: \lte, msg: '長度不符'
@@ -104,6 +109,7 @@ fc["作品簡介-中文"] =
 fc["作品簡介-英文"] =
   type: \@makeform/textarea
   meta:
+    title: "作品簡介（英文）"
     is-required: true
     term: [{
       opset: \length, enabled: true, op: \lte, msg: '長度不符'
@@ -168,6 +174,7 @@ fc["上傳作品之展呈示意圖"] =
 fc["自我介紹"] =
   type: \@makeform/textarea
   meta:
+    title: "自我介紹（中文）"
     is-required: true
     term: [{
       opset: \length, enabled: true, op: \lte, msg: '長度不符'
@@ -179,6 +186,7 @@ fc["自我介紹"] =
 fc["參展經歷"] =
   type: \@makeform/textarea
   meta:
+    title: "參展經歷（中文）"
     is-required: true
     term: [{
       opset: \length, enabled: true, op: \lte, msg: '長度不符'
@@ -254,7 +262,7 @@ fc["繳費方式"] =
   meta:
     is-required: true
     config: values: [
-      {value: "線上刷卡", label: "線上刷卡/超商條碼"}
+      {value: "線上刷卡", label: "線上刷卡／超商條碼"}
       {value: "其他付款方式", label: "其他付款方式"}
     ]
     plugin: [
