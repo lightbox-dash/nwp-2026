@@ -200,21 +200,34 @@ fc["參展經歷"] =
       ]
 
 fc["是否具學生身分？"] =
-  type: \@makeform/radio
+  type: 
+    name: \@makeform/radio
+    version: "1.3.2"
+    path: "index.html"
   meta:
     title: "您的身分別？"
     is-required: true
     plugin: [
     * type: \dependency
       config:
-        values: ["學生、身心礙障者"]
+        values: ["是"]
         is-required: true
         visible: true
         disabled: false
         targets: <[上傳證件]>
+    * type: \dependency
+      config:
+        values: ["否"]
+        is-required: true
+        visible: true
+        disabled: false
+        targets: <[不用上傳證件]>
     ]
     config:
-      values: <[一般（個人、團體） 學生、身心礙障者]>
+      values: [
+        {value: "否", label: "一般（個人、團體）"}
+        {value: "是", label: "學生、身心礙障者"}
+      ]
       note: [
         "僅影響報名費用。",
         "若以團體名義參加，無論團體的人數或身分，報名費皆為 1,200 元。",

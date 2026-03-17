@@ -81,7 +81,8 @@ div
       +widget("繳費方式")
       +visibility("其他付款方式")
         div 請至以下頁面進行付款，並於取得票號後於下方填寫：
-        a.btn.btn-primary.mt-2.mb-4(href="https://lightbox-newwave.oen.tw/events/3B0rJ2Xs9u38zY5TKBRJk6pKadh", target="_blank") 付款頁面
+        +visibility("上傳證件"): a.btn.btn-primary.mt-2.mb-4(href="https://lightbox-newwave.oen.tw/events/3B0rJ2Xs9u38zY5TKBRJk6pKadh?shearTicket=3B3zPY9xvCFDGUdsanKA5aly9A5", target="_blank") 付款頁面
+        +visibility("不用上傳證件"): a.btn.btn-primary.mt-2.mb-4(href="https://lightbox-newwave.oen.tw/events/3B0rJ2Xs9u38zY5TKBRJk6pKadh?shearTicket=3B3zUGpI5UkoroAAs93y958L7AD", target="_blank") 付款頁面
         +widget("票號或訂單編號")
       +visibility("報名費-一般"): +widget("報名費-一般")
       +visibility("報名費-學生"): +widget("報名費-學生")
