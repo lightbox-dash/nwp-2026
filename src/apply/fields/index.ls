@@ -193,21 +193,22 @@ fc["參展經歷"] =
 fc["是否具學生身分？"] =
   type: \@makeform/radio
   meta:
-    title: "是否為學生、身心礙障者？"
+    title: "您的身分別？"
     is-required: true
     plugin: [
     * type: \dependency
       config:
-        values: ["是"]
+        values: ["學生、身心礙障者"]
         is-required: true
         visible: true
         disabled: false
         targets: <[上傳證件]>
     ]
     config:
-      values: <[是 否]>
+      values: <[一般（個人、團體） 學生、身心礙障者]>
       note: [
         "僅影響報名費用。",
+        "若以團體名義參加，無論團體的人數或身分，報名費皆為 1,200 元。",
         "學生身分定義：就讀中華民國公、私立國中小、高中、高職之在學生，以及大專院校在學學生包含大專、專科、軍警學校及宗教院校。但不包含私人補習班、社區大學、空中大學、空中學院及大專院校附設之進修補習班。學制包含二專、五專、二技、四技、大學、碩士及博士。部別包含日間部、夜間部、進修部（須為上述學制）及在職專班（須為上述學制）。"
       ]
 
@@ -246,10 +247,16 @@ fc["報名費-學生"] =
       unit: \新台幣
 
 fc["繳費方式"] =
-  type: \@makeform/radio
+  type: 
+    name: \@makeform/radio
+    version: "1.3.2"
+    path: "index.html"
   meta:
     is-required: true
-    config: values: <[線上刷卡 其他付款方式]>
+    config: values: [
+      {value: "線上刷卡", label: "線上刷卡/超商條碼"}
+      {value: "其他付款方式", label: "其他付款方式"}
+    ]
     plugin: [
     * type: \dependency
       config:
