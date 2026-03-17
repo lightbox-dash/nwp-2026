@@ -56,11 +56,11 @@ mod = ({root, ctx, t, pubsub, manager, bi}) ->
     block.i18n.module.on \languageChanged, ->
     _debounce-render = debounce 350, ~> view.render!
     ret = null
-    getInstructions = ->>
+    getLightboxlibData = ->>
       if(!ret) =>
-        res = await fetch('https://www.lightboxlib.org/jsonapi/node/annual_plan_library/4d6f62ea-3521-476a-877d-6a6b5abb8188')
+        res = await fetch('https://www.lightboxlib.org/jsonapi/node/grantdash_connect/5aedf676-460e-439c-a9c8-d8a85b06fcc4?include=field_image')
         ret := await res.json!
-      ret?.data?.attributes?.field_what?.value
+      ret
     @_ldview = view = new ldview do
       init-render: false
       root: root
@@ -70,8 +70,15 @@ mod = ({root, ctx, t, pubsub, manager, bi}) ->
         visibility: ({node}) ~>
           name = node.getAttribute \data-name
           node.classList.toggle \d-none, (@_visibility[name]? and !@_visibility[name])
+        "lb-spec": ({node}) ~>>
+          await getLightboxlibData!
+          node.innerHTML = ret?.data?.attributes?.field_why?.value
         "lb-instructions": ({node}) ~>>
-          node.innerHTML = await getInstructions!
+          await getLightboxlibData!
+          node.innerHTML = ret?.data?.attributes?.field_what?.value
+        "brd-visual": ({node}) ~>>
+          await getLightboxlibData!
+          node['path-src'] = "https://www.lightboxlib.org"+ret?.included[0].attributes?.uri?.url
           
     @formmgr.on \change, debounce 350, ~> @optin!
     @optin!

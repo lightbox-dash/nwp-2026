@@ -6,9 +6,24 @@ div
   script(type="@plotdb/block")
     include:lsc fields/index.ls
     include:lsc index.ls
+
+  script.
+    // meta pixel
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '765907572989163');
+    fbq('track', 'PageView');
+  noscript
+    img(height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=765907572989163&ev=PageView&noscript=1')
+
   div(plug="form")
-    img.border-bottom.print-hide.embed-hide(path,path-src="img/2026 New Wave_1600x600px.jpg?v1",
-    width="1600",height="600",style="width:100%;height:auto",alt="brd visual")
+    img.border-bottom.print-hide.embed-hide(ld="brd-visual",path,path-src="img/2026 New Wave_1600x600px.jpg?v=1", width="1600",style="width:100%;height:auto",alt="brd visual")
     .sect.embed-hide
       h1 #[span(t="title.name")]
       .mt-3(t="title.date")
@@ -29,11 +44,7 @@ div
       .bg-white.shadow-sm.rounded: +widget("參賽資格")
       
       h4.pt-4 作品規範
-      ul.li-tweak
-        li 投件作品，須為 2021 年後之創作。
-        li 投件作品，須未曾獲得或入選國內外之攝影或藝術創作獎項。
-        li 個人或團體，至多可各投一組作品參加。
-        li 投件作品，可為進行中，或已完成之創作。
+      .li-tweak(ld="lb-spec")
       .ml-1.font-weight-bold: +widget("作品規範")
       
       h4.pt-4 投件須知

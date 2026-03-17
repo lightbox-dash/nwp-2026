@@ -66,8 +66,6 @@ module.exports =
           lc.open.setAttribute \href, lc.current
 
 
-      
-
     detail = (v) ->
       ps = v.map (f) ->
         (res, rej) <- new Promise _
