@@ -1,0 +1,58 @@
+//- module
+//- TODO merge with /base.pug if possible?
+doctype html
+html(lang="zh-Hant-TW")
+  include /modules/common.pug
+  include /modules/version.pug
+  -
+    libLoader.version(version);
+  block vars
+  head
+    +meta(meta)
+    block prehead
+    //- TODO block preload hint removal
+    //- this is added for optimizing module loading.
+    //- however, not all blocks use makeform, so we should not add this here.
+    //- since this only affects speed, we can put it here for now
+    //- until we come up with a good approach for bundle hinting.
+    link(rel="block",href="/assets/bundle/makeform.min.html")
+    +css([ {url: "/assets/bundle/base.min.css"} ])
+    block head
+    script if(/MSIE|Trident/.exec(navigator.userAgent)) { window.location.href = "/err/ie/" };
+    script(async='' src='https://www.googletagmanager.com/gtag/js?id=G-Y9QFDR0GTX')
+    script.
+      // gtag
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y9QFDR0GTX');
+
+    script.
+      // meta pixel
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '765907572989163');
+      fbq('track', 'PageView');
+    noscript
+      img(height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=765907572989163&ev=PageView&noscript=1')
+
+  body
+    include covers.pug
+    include /modules/navtop.pug
+    block body
+    +script([
+      {url: "/assets/bundle/base.min.js"},
+      {url: "/site/js/gdcfg.js"}
+    ])
+    +script([ {name: "ldfile"} ])
+    +register-locals("exports", true)
+    script(type="module"): include:lsc index.ls
+    script(type="module"): include:lsc upload.ls
+    block script
+    include /modules/lateinit.pug
