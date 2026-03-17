@@ -44,6 +44,9 @@ module.exports =
                 lc.ldcv.toggle!
 
             handler:
+              number: ({node,ctx}) ->
+                idx = lc.filelist.findIndex (f) -> f.url is ctx.url
+                node.innerText = idx + 1
               image: ({node,ctx}) -> node.setAttribute \src, ctx.url
       action: click:
         "next-img": ~>

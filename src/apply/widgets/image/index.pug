@@ -15,6 +15,7 @@ div
         button.btn.btn-light.clickable: i.i-chevron-left
     .row
       .col-6.col-lg-4.p-2(ld-each="image")
-        .w-100.embed-responsive.embed-responsive-1by1
+        .w-100.embed-responsive.embed-responsive-1by1.position-relative
           img.embed-responsive-item.clickable(ld="image",
           src="data:image/gif;base64,R0lGODlhAwABAIAAAHFxcQAAACH5BAAAAAAALAAAAAADAAEAAAIChAsAOw==")
+          span.position-absolute.p-1(style="right:0;bottom:0;z-index:1;font-size:.75rem;background:#fffa;",ld="number") abc
