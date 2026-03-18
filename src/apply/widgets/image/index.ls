@@ -21,18 +21,18 @@ module.exports =
     checkImageReady = (url) ->
       new Promise (resolve) ->
         img = new Image!
-        img.onload = -> resolve true
-        img.onerror = -> resolve false
+        timer = setTimeout(->
+          img.src = ""
+          resolve false
+        , 3000)
+        img.onload = -> clearTimeout(timer); resolve true
+        img.onerror = -> clearTimeout(timer); resolve false
         img.src = url
-    thumbPoll = (node, ctx, retry = 0) ->>
+    thumbPoll = (node, ctx) ->>
       try
         isReady = await checkImageReady(ctx.thumbUrl)
-        if isReady
-          node.setAttribute \src, ctx.thumbUrl
-        # else if retry < 3
-        #   setTimeout(thumbPoll(node, ctx, retry + 1), 3000)
-        else
-          node.setAttribute \src, ctx.url
+        if node
+          node.setAttribute \src, if isReady then ctx.thumbUrl else ctx.url
       catch e
         node.setAttribute \src, ctx.url
     view = new ldview do
