@@ -290,6 +290,7 @@ fc["繳費方式"] =
 fc["票號或訂單編號"] =
   type: \@makeform/input
   meta:
+    title: "票號"
     is-required: false
     disabled: true
     term: [{

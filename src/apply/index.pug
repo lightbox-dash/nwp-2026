@@ -57,12 +57,10 @@ div
 
     .sect
       h3#sect-3.mb-5 三、創作自述
-      .row
-        .col-md: +widget("作品名稱-中文")
-        .col-md: +widget("作品名稱-英文")
-      .row
-        .col-md: +widget("作品簡介-中文")
-        .col-md: +widget("作品簡介-英文")
+      +widget("作品名稱-中文")
+      +widget("作品簡介-中文")
+      +widget("作品名稱-英文")
+      +widget("作品簡介-英文")
       +widget("創作媒材揭露：影像內容是否源自生成式 AI 工具？")
 
     .sect
@@ -80,7 +78,7 @@ div
       +visibility("上傳證件"): +widget("上傳證件")
       +widget("繳費方式")
       +visibility("其他付款方式")
-        div 請至以下頁面進行付款，並於取得票號後於下方填寫：
+        div 請至以下頁面進行付款。取得票號後，請於下方填寫：
         +visibility("上傳證件"): a.btn.btn-primary.mt-2.mb-4(href="https://lightbox-newwave.oen.tw/events/3B0rJ2Xs9u38zY5TKBRJk6pKadh?shearTicket=3B3zPY9xvCFDGUdsanKA5aly9A5", target="_blank") 付款頁面
         +visibility("不用上傳證件"): a.btn.btn-primary.mt-2.mb-4(href="https://lightbox-newwave.oen.tw/events/3B0rJ2Xs9u38zY5TKBRJk6pKadh?shearTicket=3B3zUGpI5UkoroAAs93y958L7AD", target="_blank") 付款頁面
         +widget("票號或訂單編號")
