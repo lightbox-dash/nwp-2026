@@ -9,7 +9,7 @@ window.lib = ({def, i18n}) ->
     form = ((prj.detail or {}).custom or {})[def.config.alias or def.slug] or {}
     lng = i18n.getLanguage!
     data =
-      name: _(form["作品名稱"])
+      name: _(form["作品名稱-中文"])+"／"+_(form["作品名稱-英文"])
       description: ""
       team:
         name: _(form["真實姓名"])
