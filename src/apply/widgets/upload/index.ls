@@ -47,6 +47,10 @@ mod = ({root, ctx, data, parent, pubsub, t, i18n}, ext) ->
       root: root
       action:
         change: input: ({node}) ~>
+          _maximum = @_meta.term.filter(-> it.op.id == \count-range).0.config.max
+          if (lc.file or []).length + node.files.length > _maximum => 
+            alert("超過投件張數")
+            return
           if !@mod.child._upload => return
           p = Promise.all(
             Array.from(node.files).map (f) ~>
@@ -69,12 +73,10 @@ mod = ({root, ctx, data, parent, pubsub, t, i18n}, ext) ->
                       # in hint block which op should be check in advance
                       if /count/.exec(t.op.id) => return Promise.resolve true
                       v = await t.validate(f)
-                      console.log(v, f, t)
                       if !v => failed.push {
                         filename: f.filename
                         hint: t.msg
                       }
-                  console.log(failed)
                   return failed
             .then (failed) ~>
               if failed.length => return Promise.reject new Error! <<< {name: \lderror, id: 1020, msg: failed}
