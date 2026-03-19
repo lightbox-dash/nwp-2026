@@ -17,9 +17,11 @@ html(lang="zh-Hant-TW")
     //- until we come up with a good approach for bundle hinting.
     link(rel="block",href="/assets/bundle/makeform.min.html")
     +css([ {url: "/assets/bundle/base.min.css"} ])
+    style.
+      .btn[ld="print"] {display: none !important;}
     block head
     script if(/MSIE|Trident/.exec(navigator.userAgent)) { window.location.href = "/err/ie/" };
-    script(async='' src='https://www.googletagmanager.com/gtag/js?id=G-Y9QFDR0GTX')
+    script(async='', src='https://www.googletagmanager.com/gtag/js?id=G-Y9QFDR0GTX')
     script.
       // gtag
       window.dataLayer = window.dataLayer || [];

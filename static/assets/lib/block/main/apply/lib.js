@@ -11,7 +11,7 @@ window.lib = function(arg$){
       } else if (isNaN(idx)) {
         return idx;
       } else {
-        return "2023-" + (idx + "").padStart(3, "0");
+        return "2026-" + (idx + "").padStart(3, "0");
       }
     },
     info: function(arg$){
@@ -23,7 +23,7 @@ window.lib = function(arg$){
       form = ((prj.detail || {}).custom || {})[def.config.alias || def.slug] || {};
       lng = i18n.getLanguage();
       return data = {
-        name: _(form["作品名稱"]),
+        name: _(form["作品名稱-中文"]) + "／" + _(form["作品名稱-英文"]),
         description: "",
         team: {
           name: _(form["真實姓名"]),
