@@ -3,7 +3,7 @@ window.lib = ({def, i18n}) ->
     idx = (prj.system or {}).idx
     if !(idx?) => \???
     else if isNaN(idx) => idx
-    else "2023-" + "#idx".padStart(3, "0")
+    else "2026-" + "#idx".padStart(3, "0")
   info: ({prj}) ->
     _ = (v) -> (if v => v.v else v) or 'n/a'
     form = ((prj.detail or {}).custom or {})[def.config.alias or def.slug] or {}
