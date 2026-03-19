@@ -1,7 +1,10 @@
 fc = {}
 
 fc["參賽資格"] =
-  type: \@makeform/checklist
+  type:
+    name: \@makeform/checklist
+    version: "1.0.5"
+    path: "index.html"
   meta:
     is-required: true
     config:
