@@ -19,16 +19,17 @@ html(lang="zh-Hant-TW")
     +css([ {url: "/assets/bundle/base.min.css"} ])
     block head
     script if(/MSIE|Trident/.exec(navigator.userAgent)) { window.location.href = "/err/ie/" };
-    script(async='', src='https://www.googletagmanager.com/gtag/js?id=G-Y9QFDR0GTX')
+
+    //- gtag
+    script(async='', src='https://www.googletagmanager.com/gtag/js?id=G-NZX453VCE7')
     script.
-      // gtag
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-Y9QFDR0GTX');
+      gtag('config', 'G-NZX453VCE7');
 
+    //- meta pixel
     script.
-      // meta pixel
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
