@@ -65,7 +65,7 @@ module.exports =
                 idx = lc.filelist.findIndex (f) -> f.url is ctx.url
                 node.innerText = idx + 1
               image: ({node,ctx}) -> 
-                thumb = ctx.url.replace('/file/', 'https://grantdash.blob.core.windows.net/thumbnails/')
+                thumb = ctx?.url?.replace('/file/', 'https://grantdash.blob.core.windows.net/thumbnails/')
                 ctx.thumbUrl = thumb
                 thumbPoll(node, ctx)
       action: click:
