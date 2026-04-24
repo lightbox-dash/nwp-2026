@@ -35,6 +35,32 @@ module.exports =
           node.setAttribute \src, if isReady then ctx.thumbUrl else ctx.url
       catch e
         node.setAttribute \src, ctx.url
+
+    goNext = ->
+      idx = lc.filelist.findIndex (f) -> f.url is lc.current
+      nextIdx = (idx + 1)%lc.filelist.length
+      lc.current = lc.filelist[nextIdx].url
+      lc.viewer.innerHTML = ""
+      img = new Image!
+      img.src = lc.current
+      lc.viewer.appendChild img
+      lc.open.setAttribute \href, lc.current
+
+    goPrev = ->
+      idx = lc.filelist.findIndex (f) -> f.url is lc.current
+      nextIdx = (idx - 1 + lc.filelist.length)%lc.filelist.length
+      lc.current = lc.filelist[nextIdx].url
+      lc.viewer.innerHTML = ""
+      img = new Image!
+      img.src = lc.current
+      lc.viewer.appendChild img
+      lc.open.setAttribute \href, lc.current
+
+    document.addEventListener 'keydown', (event) ->
+      switch event.code
+        case 'ArrowRight' => goNext!
+        case 'ArrowLeft' => goPrev!
+        
     view = new ldview do
       root: root
       ctx: {}
@@ -50,15 +76,16 @@ module.exports =
             lc.filelist = file
             if Array.isArray(file) => file else if file => [file] else []
           view:
-            action: click:
-              "@": ({ctx}) ->
-                lc.current = ctx.url
-                lc.viewer.innerHTML = ""
-                img = new Image!
-                img.src = ctx.url
-                lc.viewer.appendChild img
-                lc.open.setAttribute \href, ctx.url
-                lc.ldcv.toggle!
+            action:                     
+              click:
+                "@": ({ctx}) ->
+                  lc.current = ctx.url
+                  lc.viewer.innerHTML = ""
+                  img = new Image!
+                  img.src = ctx.url
+                  lc.viewer.appendChild img
+                  lc.open.setAttribute \href, ctx.url
+                  lc.ldcv.toggle!
 
             handler:
               number: ({node,ctx}) ->
@@ -68,25 +95,10 @@ module.exports =
                 thumb = ctx?.url?.replace('/file/', 'https://grantdash.blob.core.windows.net/thumbnails/')
                 ctx.thumbUrl = thumb
                 thumbPoll(node, ctx)
-      action: click:
-        "next-img": ~>
-          idx = lc.filelist.findIndex (f) -> f.url is lc.current
-          nextIdx = (idx + 1)%lc.filelist.length
-          lc.current = lc.filelist[nextIdx].url
-          lc.viewer.innerHTML = ""
-          img = new Image!
-          img.src = lc.current
-          lc.viewer.appendChild img
-          lc.open.setAttribute \href, lc.current
-        "prev-img": ~>
-          idx = lc.filelist.findIndex (f) -> f.url is lc.current
-          nextIdx = (idx - 1 + lc.filelist.length)%lc.filelist.length
-          lc.current = lc.filelist[nextIdx].url
-          lc.viewer.innerHTML = ""
-          img = new Image!
-          img.src = lc.current
-          lc.viewer.appendChild img
-          lc.open.setAttribute \href, lc.current
+      action:
+        click:
+          "next-img": ~> goNext!
+          "prev-img": ~> goPrev!
 
 
     detail = (v) ->
