@@ -7,7 +7,7 @@ module.exports =
       en:
         title:
           year: ""
-          name: "2026 New Wave 攝影創作獎"
+          name: "2026 New Wave Photography Award"
           date: "Application Period: March 20, 2026, to April 30, 2026 (until 11:59, UTC+8)."
         "必填項目提示": [
           "Fields marked with"
@@ -44,6 +44,29 @@ mod = ({root, ctx, t, pubsub, manager, bi}) ->
     # your field definition list for prj.tdb to initialize
     fields: fc
   init: (base) ->
+    i18n-ext =
+      en:
+        "是": "Yes."
+        "否": "No."
+        "作品名稱（中文）": "Title (Mandarin)"
+        "作品簡介（中文）":	"Project Description (Mandarin)"
+        "作品名稱（英文）":	"Title (English)"
+        "作品簡介（英文）":	"Project Description (English)"
+        "創作媒材揭露：影像內容是否源自生成式 AI 工具？": "Disclosure of Creative Medium: Was the image content generated using generative AI tools?"
+        "作品上傳": "Works"
+        "三、創作自述": "III. Artist Statement"
+        "四、作品上傳": "IV. Submitted Works"
+      "zh-TW":
+        "是": "是"
+        "否": "否"
+        "作品名稱（中文）": "作品名稱（中文）"
+        "作品簡介（中文）":	"作品簡介（中文）"
+        "作品名稱（英文）":	"作品名稱（英文）"
+        "作品簡介（英文）":	"作品簡介（英文）"
+        "創作媒材揭露：影像內容是否源自生成式 AI 工具？": "創作媒材揭露：影像內容是否源自生成式 AI 工具？"
+        "作品上傳": "作品上傳"
+        "三、創作自述": "三、創作自述"
+        "四、作品上傳": "四、作品上傳"
     @formmgr = base.formmgr
     @{}_visibility
     @ldcv = {}
