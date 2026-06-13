@@ -35,26 +35,25 @@ module.exports =
           node.setAttribute \src, if isReady then ctx.thumbUrl else ctx.url
       catch e
         node.setAttribute \src, ctx.url
+    updateLCViewer = (lc) ->
+      lc.viewer.innerHTML = ""
+      lc.viewer.style.backgroundImage = "url(\"#{lc.current.replace '/file/', 'https://grantdash.blob.core.windows.net/thumbnails/'}\")"
+      img = new Image!
+      img.src = lc.current
+      lc.viewer.appendChild img
+      lc.open.setAttribute \href, lc.current
 
     goNext = ->
       idx = lc.filelist.findIndex (f) -> f.url is lc.current
       nextIdx = (idx + 1)%lc.filelist.length
       lc.current = lc.filelist[nextIdx].url
-      lc.viewer.innerHTML = ""
-      img = new Image!
-      img.src = lc.current
-      lc.viewer.appendChild img
-      lc.open.setAttribute \href, lc.current
+      updateLCViewer(lc)
 
     goPrev = ->
       idx = lc.filelist.findIndex (f) -> f.url is lc.current
       nextIdx = (idx - 1 + lc.filelist.length)%lc.filelist.length
       lc.current = lc.filelist[nextIdx].url
-      lc.viewer.innerHTML = ""
-      img = new Image!
-      img.src = lc.current
-      lc.viewer.appendChild img
-      lc.open.setAttribute \href, lc.current
+      updateLCViewer(lc)
 
     document.addEventListener 'keydown', (event) ->
       switch event.code
@@ -80,11 +79,7 @@ module.exports =
               click:
                 "@": ({ctx}) ->
                   lc.current = ctx.url
-                  lc.viewer.innerHTML = ""
-                  img = new Image!
-                  img.src = ctx.url
-                  lc.viewer.appendChild img
-                  lc.open.setAttribute \href, ctx.url
+                  updateLCViewer(lc)
                   lc.ldcv.toggle!
 
             handler:
